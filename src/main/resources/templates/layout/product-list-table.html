@@ -1,0 +1,46 @@
+<div>
+    <table class="product" id="product-list-table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th class="p-1">Variant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td>
+                <img th:src="${product.image}" height="100px" width="100px"/>
+                <h4 th:text="${product.title}" class="mb-0">Product Title</h4>
+                <span class="text-grey-1">
+                            from <span th:text="${product.vendor}"></span>
+
+                        </span>
+            </td>
+            <td>
+                <ul class="scroll-200 border-grey-1 rounded p-1 no-list-style">
+                    <li th:each="variant : ${product.variants}">
+                        <span th:text="${variant.title}">Title</span> -
+                        <span th:text="${variant.price}+' kr'">Price</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+
+        <!--                <p th:text="'Handle: ' + ${product.handle}"></p>-->
+
+        <!--                <img th:text="${product.image}" style="width: 200px; height: auto"/>-->
+
+
+    </table>
+    <hr/>
+    <script>
+        tableInit = window.setTimeout(() => {
+            if (DataTable == undefined) {
+                tableInit;
+            }
+            let table = new DataTable('#product-list-table');
+        }, 500)
+        tableInit;
+    </script>
+</div>

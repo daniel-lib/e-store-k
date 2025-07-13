@@ -1,0 +1,38 @@
+<div th:fragment="add-product-form" class="p-2" hx-indicator="#spinner">
+    <form class="input-validation-required" hx-post="/products" hx-trigger="submit"
+           hx-swap="none">
+        <wa-input name="title" label="Title" required></wa-input>
+        <br/>
+        <wa-input name="vendor" label="Vendor" required></wa-input>
+        <br/>
+        <br/>
+        <wa-button type="submit">
+            <div id="spinner" class="spinner" style="display: none;">⏳</div>
+            Submit
+        </wa-button>
+    </form>
+
+    <script type="module">
+        const form = document.querySelector('.input-validation-required');
+
+        // Wait for controls to be defined before attaching form listeners
+        await Promise.all([
+            customElements.whenDefined('wa-button'),
+            customElements.whenDefined('wa-checkbox'),
+            customElements.whenDefined('wa-input'),
+            customElements.whenDefined('wa-option'),
+            customElements.whenDefined('wa-select'),
+            customElements.whenDefined('wa-textarea')
+        ]).then(() => {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                alert('All fields are valid!');
+            });
+        });
+    </script>
+
+
+    <div id="notification" style="display:none;"></div>
+
+
+</div>

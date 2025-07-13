@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer Service</title>
+    <!--    HTMLX-->
+    <script th:src="@{/htmx.min.js}"></script>
+    <!--        Web Awesome-->
+    <!--        <script type="module" th:src="@{/webawesome/webawesome.loader.js}"></script>-->
+    <!--        <link rel="stylesheet" th:href="@{/webawesome/webawesome.css}">-->
+    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.2/dist/styles/webawesome.css"/>
+    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.2/dist/webawesome.loader.js"></script>
+    <link rel="stylesheet" th:href="@{/style/style.css}">
+    <script th:src="@{/sweetalert2.js}" defer></script>
+    <script th:src="@{/main.js}" defer></script>
+
+    <link rel="stylesheet" th:href="@{/data-tables/datatables.min.css}">
+    <script th:src="@{/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/data-tables/datatables.min.js}" defer></script>
+
+
+</head>
+<body>
+<header class="d-flex justify-content-around">
+    <svg width="15px" height="15px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+        <title>search</title>
+        <desc>Created with Sketch Beta.</desc>
+        <defs>
+
+        </defs>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+            <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-256.000000, -1139.000000)" fill="#000000">
+                <path d="M269.46,1163.45 C263.17,1163.45 258.071,1158.44 258.071,1152.25 C258.071,1146.06 263.17,1141.04 269.46,1141.04 C275.75,1141.04 280.85,1146.06 280.85,1152.25 C280.85,1158.44 275.75,1163.45 269.46,1163.45 L269.46,1163.45 Z M287.688,1169.25 L279.429,1161.12 C281.591,1158.77 282.92,1155.67 282.92,1152.25 C282.92,1144.93 276.894,1139 269.46,1139 C262.026,1139 256,1144.93 256,1152.25 C256,1159.56 262.026,1165.49 269.46,1165.49 C272.672,1165.49 275.618,1164.38 277.932,1162.53 L286.224,1170.69 C286.629,1171.09 287.284,1171.09 287.688,1170.69 C288.093,1170.3 288.093,1169.65 287.688,1169.25 L287.688,1169.25 Z"
+                      id="search" sketch:type="MSShapeGroup">
+
+                </path>
+            </g>
+        </g>
+    </svg>
+    <h2><i>DANNE</i></h2>
+
+    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+              stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</header>
+<section class="main-container">
+    <section>
+        <wa-tab-group active="products">
+            <wa-tab panel="products">Products</wa-tab>
+            <wa-tab panel="add-product">&#9886; &#10010; &#9887;</wa-tab>
+
+            <wa-tab-panel name="products">
+                <h3>Explore Products</h3>
+
+                <div class="d-flex justify-content-center">
+                    <div class="animation-form">
+                        <wa-animation name="rubberBand" duration="1000" iterations="1">
+                            <wa-button hx-get="/products" hx-target="#product-list-table-container" hx-trigger="click">
+                                Load Products
+                            </wa-button>
+                        </wa-animation>
+                    </div>
+
+                    <script>
+                        const container = document.querySelector('.animation-form');
+                        const animation = container.querySelector('wa-animation');
+                        const button = container.querySelector('wa-button');
+
+                        button.addEventListener('click', () => {
+                            animation.play = true;
+                        });
+                    </script>
+                </div>
+                <main>
+                    <div id="product-list">
+                        <div id="product-list-table-container">
+
+                        </div>
+                    </div>
+                </main>
+            </wa-tab-panel>
+            <wa-tab-panel name="add-product">
+                <div th:replace="~{layout/add-product-form::add-product-form}"></div>
+            </wa-tab-panel>
+        </wa-tab-group>
+    </section>
+</section>
+
+</body>
+</html>
