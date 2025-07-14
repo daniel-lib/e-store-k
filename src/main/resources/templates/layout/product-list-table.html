@@ -10,11 +10,26 @@
         <tr th:each="product : ${products}">
             <td>
                 <img th:src="${product.image}" height="100px" width="100px"/>
-                <h4 th:text="${product.title}" class="mb-0">Product Title</h4>
-                <span class="text-grey-1">
-                            from <span th:text="${product.vendor}"></span>
+                <span d-flex>
+                    <h4 th:text="${product.title}" class="mb-0">Product Title</h4>
 
-                        </span>
+                <span class="text-grey-1">
+                            from <span th:text="${product.vendor}"></span></span>
+
+                     <span class="edit-product-btn">
+                         <a th:href="@{/products/edit/{id}(id=${product.id})}">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                  class="bi bi-pencil"
+                                  viewBox="0 0 16 16">
+                            <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-4 1.5a.5.5 0 0 1-.65-.65l1.5-4a.5.5 0 0 1 .11-.168l10-10zm1.415 2.121L13 2.414 3.5 11.914l-.793.793-1.147 3.06 3.06-1.147.793-.793L13.586 3.5l.975-.975zm-2.122-2.122L11.586 1.5 2.5 10.586l-.793.793-1.147 3.06 3.06-1.147.793-.793L14.5 2.414l-.975-.975z"/>
+                        </svg>
+                             Edit
+                         </a>
+                    </span>
+
+
+
+                </span>
             </td>
             <td>
                 <ul class="scroll-200 border-grey-1 rounded p-1 no-list-style">

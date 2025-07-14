@@ -110,7 +110,8 @@ class ProductService(
         if (product.id == null) product.id = UUID.randomUUID().toString()
         if (product.image == null) product.image =
             "https://images.unsplash.com/photo-1701769454078-2ba2f3788bc2?q=80&w=423&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        if (product.createdAt == null) product.createdAt = OffsetDateTime.now();
+        if (product.createdAt == null) product.createdAt = OffsetDateTime.now()
+        if(product.handle == null) product.handle = product.title?.lowercase()?.replace(" ", "-")?.take(50)
         jdbcClient.sql(
             """
                                 INSERT INTO products (id, title, handle, vendor, image, created_at)
@@ -125,5 +126,21 @@ class ProductService(
             .param("image", product.image)
             .param("createdAt", product.createdAt)
             .update()
+    }
+
+    fun getProductById(productId: String): Product? {
+        return jdbcClient.sql("SELECT id, title, handle, vendor, image FROM products WHERE id = :id")
+            .param("id", productId)
+            .query { rs, _ ->
+                Product(
+                    id = rs.getString("id"),
+                    title = rs.getString("title"),
+                    handle = rs.getString("handle"),
+                    vendor = rs.getString("vendor"),
+                    image = rs.getString("image")
+                )
+            }
+            .list()
+            .firstOrNull()
     }
 }

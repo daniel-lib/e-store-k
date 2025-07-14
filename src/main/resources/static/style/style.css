@@ -47,11 +47,21 @@
 .justify-content-center{
     justify-content: center;
 }
+.align-middle{
+    align-self: center;
+}
+.align-start{
+    align-self: start;
+}
 header{
     position: sticky;
     top: 0;
     background: #FFF;
     z-index: 1;
+    margin-top: 1em;
+}
+header h3{
+    font-weight: 900;
 }
 
 .spinner {
@@ -59,4 +69,11 @@ header{
 }
 .htmx-request .spinner {
     display: inline-block;
+}
+.m-10px{
+    margin: 10px;
+}
+.link-plain{
+    text-decoration: none !important;
+    color: inherit !important;
 }

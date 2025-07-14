@@ -18,13 +18,17 @@ document.body.addEventListener('htmx:afterRequest',
         // alert(event);
         const xhr = event.detail.xhr;   //raw XHR object
         const contentType = xhr.getResponseHeader("Content-Type");
-
+        let textField = document.querySelectorAll("#product-submission-form > input[type=text]")
+    // alert(textField.length)
         if (contentType && contentType.includes("text/plain")) {
             const data = xhr.responseText;
             if (data === 'Product saved') {
-                notify(data.message, "success")
+                notify(data, "success")
+                for (let field of textField) {
+                    field.value = ''
+                }
             } else {
-                notify(data.message, "error")
+                notify(data, "error")
             }
         }
     }

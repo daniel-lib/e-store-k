@@ -1,6 +1,6 @@
 <div th:fragment="add-product-form" class="p-2" hx-indicator="#spinner">
     <form class="input-validation-required" hx-post="/products" hx-trigger="submit"
-           hx-swap="none">
+           hx-swap="none" id="product-submission-form">
         <wa-input name="title" label="Title" required></wa-input>
         <br/>
         <wa-input name="vendor" label="Vendor" required></wa-input>

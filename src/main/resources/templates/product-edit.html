@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/core-layouts::head}"></head>
+<body>
+<section class="main-container ">
+    <header th:replace="layout/core-layouts::header"></header>
+    <form th:action="@{/products/save}" th:object="${product}" method="post" class="wa-form">
+        <!--        <div class="wa-form-group">-->
+        <!--            <label for="id">ID</label>-->
+        <!--            <input type="text" th:field="*{id}" id="id" class="wa-input" placeholder="Product ID"/>-->
+        <!--        </div>-->
+        <wa-input name="title" label="Title" th:value="*{title}" required></wa-input>
+        <br/>
+        <wa-input name="handle" label="Handle" th:value="*{handle}" required></wa-input>
+        <br/>
+        <wa-input name="vendor" label="Vendor" th:value="*{vendor}" required></wa-input>
+        <br/>
+        <wa-input name="image" label="Image URL" th:value="*{image}" required></wa-input>
+        <br/>
+<!--        <wa-input name="createdAt" label="Created At" th:value="*{createdAt}" type="datetime-local" required></wa-input>-->
+        <br/><br/>
+        <wa-button type="submit">
+            <i class="wa-solid wa-floppy-disk"></i> Save
+        </wa-button>
+    </form>
+
+
+    <script type="module">
+        const form = document.querySelector('.input-validation-required');
+        await Promise.all([
+            customElements.whenDefined('wa-button'),
+            customElements.whenDefined('wa-input')
+        ]).then(() => {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                alert('All fields are valid!');
+            });
+        });
+    </script>
+</section>
+</body>
+</html>
