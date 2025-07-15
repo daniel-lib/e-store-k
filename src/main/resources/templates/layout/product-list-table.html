@@ -7,16 +7,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
-            <td>
-                <img th:src="${product.image}" height="100px" width="100px"/>
-                <span d-flex>
+        <th:block th:each="product : ${products}">
+            <tr th:id="'product-'+${product.id}">
+                <td>
+                    <a th:href="${product.image}" target="_blank"><img th:src="${product.image}" height="60px"
+                                                                       width="60px"/></a>
+                    <span d-flex>
                     <h4 th:text="${product.title}" class="mb-0">Product Title</h4>
 
                 <span class="text-grey-1">
                             from <span th:text="${product.vendor}"></span></span>
 
-                     <span class="edit-product-btn">
+                     <span class="edit-product-btn me-2">
                          <a th:href="@{/products/edit/{id}(id=${product.id})}">
                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                   class="bi bi-pencil"
@@ -27,19 +29,39 @@
                          </a>
                     </span>
 
+                    <span role="button" class="delete-product-btn pointer"
+                          th:attr="onclick=|deleteProduct('${product.id}')|">
+<!--                          hx-get="/products/delete" hx-trigger="click">-->
+                         <a role="button" class="no-decortext text-danger">
+                             <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 7H20" stroke="#a63636" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path d="M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10"
+                                      stroke="#a63636" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                                      stroke="#a63636" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+
+                             Delete
+                         </a>
+                    </span>
+
 
 
                 </span>
-            </td>
-            <td>
-                <ul class="scroll-200 border-grey-1 rounded p-1 no-list-style">
-                    <li th:each="variant : ${product.variants}">
-                        <span th:text="${variant.title}">Title</span> -
-                        <span th:text="${variant.price}+' kr'">Price</span>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+                </td>
+                <td>
+                    <ul class="scroll-200 border-grey-1 rounded p-1 no-list-style">
+                        <li th:each="variant : ${product.variants}">
+                            <span th:text="${variant.title}">Title</span> -
+                            <span th:text="${variant.price}+' kr'">Price</span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </th:block>
         </tbody>
 
         <!--                <p th:text="'Handle: ' + ${product.handle}"></p>-->

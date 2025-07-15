@@ -4,11 +4,10 @@
 <body>
 <section class="main-container ">
     <header th:replace="layout/core-layouts::header"></header>
-    <form th:action="@{/products/save}" th:object="${product}" method="post" class="wa-form">
-        <!--        <div class="wa-form-group">-->
-        <!--            <label for="id">ID</label>-->
-        <!--            <input type="text" th:field="*{id}" id="id" class="wa-input" placeholder="Product ID"/>-->
-        <!--        </div>-->
+    <div class="mt-1 mb-1"><a href="/">< Back</a></div>
+    <form th:action="@{/products/update}" th:object="${product}" method="post" class="wa-form">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{createdAt}"/>
         <wa-input name="title" label="Title" th:value="*{title}" required></wa-input>
         <br/>
         <wa-input name="handle" label="Handle" th:value="*{handle}" required></wa-input>
@@ -17,11 +16,27 @@
         <br/>
         <wa-input name="image" label="Image URL" th:value="*{image}" required></wa-input>
         <br/>
-<!--        <wa-input name="createdAt" label="Created At" th:value="*{createdAt}" type="datetime-local" required></wa-input>-->
+        <!--        <wa-input name="createdAt" label="Created At" th:value="*{createdAt}" type="datetime-local" required></wa-input>-->
         <br/><br/>
-        <wa-button type="submit">
-            <i class="wa-solid wa-floppy-disk"></i> Save
-        </wa-button>
+        <div class="product-edit-variants scroll-300 height-250 border-grey-1 p-1 d-flex justify-content-between gap-1">
+            <th:block th:each="variant, variantIter : ${product.variants}">
+                <div class="border-grey-2 rounded p-1 height-250">
+
+                    <input type="hidden" th:value="${variant.id}" th:name="|variants[${variantIter.index}].id|"/>
+                    <input type="hidden" th:name="|variants[${variantIter.index}].productId|"/>
+                    <wa-input th:name="|variants[${variantIter.index}].title|" label="Variant Title"
+                              th:value="${variant.title}" required></wa-input>
+                    <wa-input th:name="|variants[${variantIter.index}].price|" label="Price"
+                              th:value="${variant.price}" required></wa-input>
+                </div>
+            </th:block>
+        </div>
+        <br/>
+        <div class="d-flex justify-content-center">
+            <wa-button type="submit">
+                <i class="wa-solid wa-floppy-disk"></i> Save
+            </wa-button>
+        </div>
     </form>
 
 

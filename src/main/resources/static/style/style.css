@@ -17,6 +17,9 @@
 .mb-0 {
     margin-bottom: 0;
 }
+.mb-1 {
+    margin-bottom: 1em;
+}
 
 .p-1{
     padding: 1em;
@@ -29,8 +32,19 @@
     height: 200px !important;
     overflow: auto;
 }
+.height-250{
+    height: 250px !important;
+}
+
+.scroll-300 {
+    height: 300px !important;
+    overflow: auto;
+}
 .border-grey-1{
     border: 1px solid #bababa;
+}
+.border-grey-2{
+    border: 1px solid #d0d0d0;
 }
 .rounded{
     border-radius: 0.25em;
@@ -46,6 +60,12 @@
 }
 .justify-content-center{
     justify-content: center;
+}
+.justify-content-between{
+    justify-content: space-between;
+}
+.gap-1{
+    gap: 1em;
 }
 .align-middle{
     align-self: center;
@@ -73,7 +93,19 @@ header h3{
 .m-10px{
     margin: 10px;
 }
+.me-2{
+    margin-right: 2em;
+}
 .link-plain{
     text-decoration: none !important;
     color: inherit !important;
+}
+.text-danger{
+    color: #a63636;
+}
+.no-decor{
+    text-decoration: none !important;
+}
+.pointer{
+    cursor: pointer;
 }
