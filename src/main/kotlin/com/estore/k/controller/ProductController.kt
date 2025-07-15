@@ -67,19 +67,33 @@ class ProductController(
         try {
 
             if (productService.deleteProduct(productId) == 0) return "error"
-            if (productService.deleteProductVatiants(productId) == 0) return "error"
+            productService.deleteProductVatiants(productId)
+//            if (productService.deleteProductVatiants(productId) == 0) return ""
             return "success"
         } catch (ex: Exception) {
+            ex.printStackTrace()
             return "error"
         }
     }
-//    fun deleteProduct(@RequestParam("id") productId: String): String {
-//        try {
-//            productService.deleteProduct(productId)
-//            return "redirect:/?success=true&message=product was deleted successfully"
-//        } catch (ex: Exception) {
-//            ex.printStackTrace()
-//            return "redirect:/products/edit/${productId}?error=true&message=product was not deleted"
-//        }
-//    }
+
+    @GetMapping("/search")
+    fun servesearchPage(model: Model): String {
+        val searchedProducts: List<Product> = emptyList()
+        model.addAttribute("searchedProducts", searchedProducts)
+        return "product-search"
+    }
+
+    @GetMapping("/search/")
+    fun searchProducts(@RequestParam("q") query: String, model: Model): String {
+        val searchedProducts = productService.searchProducts(query)
+        searchedProducts?.forEach { product: Product? ->
+            val productVariants = product?.id?.let { productService.getVariantsByProductId(it) }
+            product?.variants = productVariants ?: emptyList()
+            println("COUT() ${productVariants?.size}")
+        }
+
+        model.addAttribute("searchedProducts", searchedProducts)
+        return "layout/searched-products-table :: searched-products"
+
+    }
 }

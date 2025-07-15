@@ -205,4 +205,26 @@ class ProductService(
         return jdbcClient.sql("DELETE FROM variants WHERE product_id = :productId")
             .param("productId", productId).update()
     }
+
+    fun searchProducts(query: String): List<Product>? {
+        return jdbcClient.sql(
+            """
+            SELECT p.id, p.title, p.handle, p.vendor, p.image
+            FROM products p
+            WHERE LOWER(p.title) LIKE LOWER(:query)
+            ORDER BY p.title ASC
+            """
+        )
+            .param("query", "%$query%")
+            .query { rs, _ ->
+                Product(
+                    id = rs.getString("id"),
+                    title = rs.getString("title"),
+                    handle = rs.getString("handle"),
+                    vendor = rs.getString("vendor"),
+                    image = rs.getString("image")
+                )
+            }
+            .list()
+    }
 }

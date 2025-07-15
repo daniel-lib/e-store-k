@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/core-layouts::head}"></head>
+<body>
+<header th:replace="~{layout/core-layouts::header}"></header>
+<section class="main-container">
+    <div>
+        <div class="mt-1 mb-1"><a href="/">< Back</a></div>
+        <h4>Search Products</h4>
+        <hr/>
+        <input type="text" id="search-box"
+               hx-get="/products/search/"
+               hx-trigger="keyup changed delay:10ms"
+               hx-target="#product-search-table-body"
+               hx-params="q"
+               hx-swap="outerHTML"
+               name="q"
+               autocomplete="off"/>
+
+        <table class="product" id="product-list-table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th class="p-1">Variant</th>
+            </tr>
+            </thead>
+            <tbody th:replace="~{layout/searched-products-table::searched-products}">
+
+            </tbody>
+
+        </table>
+    </div>
+</section>
+</body>
+</html>

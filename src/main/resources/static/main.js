@@ -82,8 +82,10 @@ function deleteProduct(productId) {
                 fetch(`/products/delete/${productId}`)
                     .then(res => res.text())
                     .then(data => {
-                        document.getElementById("product-" + productId).style.backgroundColor = "#c16e6e"
-                        htmx.remove(htmx.find("#product-" + productId), 1500);
+                        if (data == "success") {
+                            document.getElementById("product-" + productId).style.backgroundColor = "#c16e6e"
+                            htmx.remove(htmx.find("#product-" + productId), 1500);
+                        }
                         notify(data == "success" ? "Product has been deleted!"
                             : "Unable to delete product", data);
                     })
