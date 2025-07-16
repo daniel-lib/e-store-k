@@ -17,8 +17,7 @@ class FileExportController(private val productService: ProductService) {
     @GetMapping("/searched/products/csv")
     fun exportCsv(@RequestParam("query") query: String): ResponseEntity<ByteArray> {
         val products = productService.searchProducts(query)
-        println("!!!!!working? ${products?.size}")
-        println("QUERY++ ${query}")
+
 
         val csvHeader = "Product ID,Title,Handle,Vendor,Image\n"
         val csvBody = products?.joinToString("\n") {
