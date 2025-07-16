@@ -207,7 +207,7 @@ class ProductService(
     }
 
     fun searchProducts(query: String): List<Product>? {
-        return jdbcClient.sql(
+        val searchedProducts = jdbcClient.sql(
             """
             SELECT p.id, p.title, p.handle, p.vendor, p.image
             FROM products p
@@ -226,5 +226,11 @@ class ProductService(
                 )
             }
             .list()
+
+        searchedProducts?.forEach { product: Product? ->
+            val productVariants = product?.id?.let { getVariantsByProductId(it) }
+            product?.variants = productVariants ?: emptyList()
+        }
+        return searchedProducts;
     }
 }

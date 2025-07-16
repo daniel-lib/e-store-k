@@ -86,13 +86,9 @@ class ProductController(
     @GetMapping("/search/")
     fun searchProducts(@RequestParam("q") query: String, model: Model): String {
         val searchedProducts = productService.searchProducts(query)
-        searchedProducts?.forEach { product: Product? ->
-            val productVariants = product?.id?.let { productService.getVariantsByProductId(it) }
-            product?.variants = productVariants ?: emptyList()
-            println("COUT() ${productVariants?.size}")
-        }
 
         model.addAttribute("searchedProducts", searchedProducts)
+        model.addAttribute("searchQuery", query);
         return "layout/searched-products-table :: searched-products"
 
     }
