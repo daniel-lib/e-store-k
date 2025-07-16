@@ -1,5 +1,5 @@
 <div>
-    <table class="product" id="product-list-table">
+    <table class="product table-striped table-hover" id="product-list-table">
         <thead>
         <tr>
             <th>Product</th>
@@ -10,10 +10,14 @@
         <th:block th:each="product : ${products}">
             <tr th:id="'product-'+${product.id}">
                 <td>
-                    <a th:href="${product.image}" target="_blank"><img th:src="${product.image}" height="60px"
-                                                                       width="60px"/></a>
+                    <div class="image-container">
+                        <a th:href="${product.image}" target="_blank"><img th:src="${product.image}" height="60px"
+                                                                           width="60px"/></a>
+                        <h4 th:text="${product.title}" class="mb-0 product-title">Product Title</h4>
+                    </div>
+
                     <span d-flex>
-                    <h4 th:text="${product.title}" class="mb-0">Product Title</h4>
+
 
                 <span class="text-grey-1">
                             from <span th:text="${product.vendor}"></span></span>
@@ -53,7 +57,7 @@
                 </span>
                 </td>
                 <td>
-                    <ul class="scroll-200 border-grey-1 rounded p-1 no-list-style">
+                    <ul class="scroll-150 border-grey-1 rounded p-1 no-list-style">
                         <li th:each="variant : ${product.variants}">
                             <span th:text="${variant.title}">Title</span> -
                             <span th:text="${variant.price}+' kr'">Price</span>
