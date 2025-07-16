@@ -109,3 +109,40 @@ header h3{
 .pointer{
     cursor: pointer;
 }
+
+.btn-danger{
+    border: 1px solid #972424;
+    background: none;
+    color: #972424;
+    transition: 0.2s ease-in-out;
+}
+.btn-danger:hover{
+    background: #972424;
+    color: #FFF;
+}
+
+.btn-sm{
+    font-size: 9pt;
+    padding: 0 0.4em;
+    font-weight: 600;
+}
+
+.btn-md{
+    font-size: 11pt;
+    padding: 0 0.8em;
+    font-weight: 600;
+}
+button:hover{
+    cursor: pointer;
+    opacity: 0.956;
+}
+.btn-outline-dark{
+    background: none;
+    color: #000;
+    border: 1px solid #000;
+    transition: 0.2ms ease-in-out;
+}
+.btn-outline-dark:hover{
+    background: #2f323f;
+    color: #FFFFFF;
+}

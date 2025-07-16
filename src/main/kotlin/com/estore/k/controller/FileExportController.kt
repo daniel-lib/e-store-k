@@ -20,7 +20,7 @@ class FileExportController(private val productService: ProductService) {
         println("!!!!!working? ${products?.size}")
         println("QUERY++ ${query}")
 
-        val csvHeader = "ID,Title,Handle,Vendor,Image\n"
+        val csvHeader = "Product ID,Title,Handle,Vendor,Image\n"
         val csvBody = products?.joinToString("\n") {
             listOf(
                 it.id.orEmpty(),

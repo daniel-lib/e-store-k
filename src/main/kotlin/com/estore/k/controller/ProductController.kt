@@ -35,10 +35,22 @@ class ProductController(
     fun saveProduct(@ModelAttribute product: Product): ResponseEntity<String> {
         if (!product.title.isNullOrBlank() && !product.vendor.isNullOrBlank()) {
             productService.saveProduct(product)
+            product.variants?.forEach { variant ->
+                variant.productId = product.id
+                productService.saveVariant(variant)
+            }
             return ResponseEntity.ok("Product saved")
         } else {
             return ResponseEntity.badRequest().body("Invalid data")
         }
+    }
+
+    @GetMapping("/add")
+    fun serveAddProductView(model: Model): String {
+//        val product = Product()
+//        product.variants = emptyList()
+//        model.addAttribute("product", product)
+        return "layout/add-product-form"
     }
 
     @GetMapping("/edit/{productId}")

@@ -7,7 +7,7 @@
     <section>
         <wa-tab-group active="products">
             <wa-tab panel="products">Products</wa-tab>
-            <wa-tab panel="add-product">&#9886; &#10010; &#9887;</wa-tab>
+            <wa-tab panel="add-product" hx-get="/products/add" hx-swap="innerHtml" hx-target="#add-product-container">&#9886; &#10010; &#9887;</wa-tab>
 
             <wa-tab-panel name="products">
                 <h3>Explore Products</h3>
@@ -40,8 +40,8 @@
                     </div>
                 </main>
             </wa-tab-panel>
-            <wa-tab-panel name="add-product">
-                <div th:replace="~{layout/add-product-form::add-product-form}"></div>
+            <wa-tab-panel name="add-product" id="add-product-container">
+<!--                <div th:replace="~{layout/add-product-form::add-product-form}"></div>-->
             </wa-tab-panel>
         </wa-tab-group>
     </section>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 import java.net.URL
 import java.time.OffsetDateTime
 import java.util.UUID
+import kotlin.random.Random
 
 @Service
 class ProductService(
@@ -114,6 +115,7 @@ class ProductService(
         if (product.handle == null) product.handle = product.title?.lowercase()?.replace(" ", "-")?.take(50)
 
         println("PRODUCT__> ${product.title}")
+        println("PRODUCT__Variant> ${product.variants?.get(0)?.title}")
         jdbcClient.sql(
             """
                                 INSERT INTO products (id, title, handle, vendor, image, created_at)
@@ -127,6 +129,25 @@ class ProductService(
             .param("vendor", product.vendor)
             .param("image", product.image)
             .param("createdAt", product.createdAt)
+            .update()
+    }
+
+    fun saveVariant(variant: Variant) {
+        if (variant.id == null) variant.id = (System.currentTimeMillis().toString()+Random.nextInt(10, 9999).toString()).toLong()
+        if (variant.featuredImage == null) variant.featuredImage =
+            "https://images.unsplash.com/photo-1701769454078-2ba2f3788bc2?q=80&w=423&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        jdbcClient.sql(
+            """
+                                INSERT INTO variants (id, product_id, title, price, featured_image)
+                                VALUES (:id, :productId, :title, :price, :featuredImage)
+                                ON CONFLICT (id) DO NOTHING
+                                """
+        )
+            .param("id", variant.id)
+            .param("productId", variant.productId)
+            .param("title", variant.title)
+            .param("price", variant.price)
+            .param("featuredImage", variant.featuredImage)
             .update()
     }
 
