@@ -36,7 +36,7 @@ class FileExportController(private val productService: ProductService) {
         val csvContent = (csvHeader + csvBody).toByteArray(StandardCharsets.UTF_8)
 
         return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=products.csv")
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=products_${query}.csv")
             .contentType(MediaType.parseMediaType("text/csv"))
             .body(csvContent)
     }

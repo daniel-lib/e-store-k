@@ -1,12 +1,12 @@
 <tbody th:fragment="searched-products" id="product-search-table-body">
-<th:block th:each="product : ${searchedProducts}">
-    <tr>
-        <td colspan="2" class="text-center">
-<!--            <a th:href="@{/export/searched/products/csv?query=(${searchQuery})}">Export as CSV</a>-->
-            <a th:href="@{/export/searched/products/csv(query=${searchQuery})}">Export as CSV</a>
+<tr>
+    <td colspan="2" class="text-center">
 
-        </td>
-    </tr>
+        <a th:href="@{/export/searched/products/csv(query=${searchQuery})}">Export as CSV</a>
+
+    </td>
+</tr>
+<th:block th:each="product : ${searchedProducts}">
 
     <tr th:id="'product-'+${product.id}">
         <td>

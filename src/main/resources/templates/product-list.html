@@ -6,7 +6,7 @@
 <section class="main-container">
     <section>
         <wa-tab-group active="products">
-            <wa-tab panel="products">Products</wa-tab>
+            <wa-tab panel="products" hx-get="/products" hx-target="#product-list-table-container" hx-trigger="click">Products</wa-tab>
             <wa-tab panel="add-product" hx-get="/products/add" hx-swap="innerHtml" hx-target="#add-product-container">&#9886; &#10010; &#9887;</wa-tab>
 
             <wa-tab-panel name="products">

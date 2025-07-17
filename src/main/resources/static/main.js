@@ -27,7 +27,9 @@ document.body.addEventListener('htmx:afterRequest',
         // alert(event);
         const xhr = event.detail.xhr;   //raw XHR object
         const contentType = xhr.getResponseHeader("Content-Type");
-        let textField = document.querySelectorAll("#product-submission-form > input[type=text]")
+        let textField = document.querySelectorAll("#product-submission-form wa-input[type=text]")
+        let numberField = document.querySelectorAll("#product-submission-form wa-input[type=number]")
+
         // alert(textField.length)
         if (contentType && contentType.includes("text/plain")) {
             const data = xhr.responseText;
@@ -36,6 +38,10 @@ document.body.addEventListener('htmx:afterRequest',
                 for (let field of textField) {
                     field.value = ''
                 }
+                for (let field of numberField) {
+                    field.value = ''
+                }
+                document.getElementById('variants-container').innerHTML = ''
             } else {
                 notify(data, "error")
             }

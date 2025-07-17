@@ -19,3 +19,4 @@ function addVariant() {
 function removeVariant(button) {
     button.closest('.variant-fieldset').remove();
 }
+

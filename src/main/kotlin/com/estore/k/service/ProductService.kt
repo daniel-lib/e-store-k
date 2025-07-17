@@ -114,8 +114,7 @@ class ProductService(
         if (product.createdAt == null) product.createdAt = OffsetDateTime.now()
         if (product.handle == null) product.handle = product.title?.lowercase()?.replace(" ", "-")?.take(50)
 
-        println("PRODUCT__> ${product.title}")
-        println("PRODUCT__Variant> ${product.variants?.get(0)?.title}")
+
         jdbcClient.sql(
             """
                                 INSERT INTO products (id, title, handle, vendor, image, created_at)

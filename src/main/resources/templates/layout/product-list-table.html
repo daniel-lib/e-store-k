@@ -1,5 +1,6 @@
 <div>
-    <table class="product table-striped table-hover" id="product-list-table">
+    <script th:src="@{/product-form.js}"></script>
+    <table class="product table-striped table-hover hover" id="product-list-table">
         <thead>
         <tr>
             <th>Product</th>
@@ -76,12 +77,6 @@
     </table>
     <hr/>
     <script>
-        tableInit = window.setTimeout(() => {
-            if (DataTable == undefined) {
-                tableInit;
-            }
-            let table = new DataTable('#product-list-table');
-        }, 500)
-        tableInit;
+        styleLoadedProductTable()
     </script>
 </div>
