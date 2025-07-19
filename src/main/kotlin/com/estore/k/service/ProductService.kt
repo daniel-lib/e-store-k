@@ -25,7 +25,7 @@ class ProductService(
     // Runs once on startup
     @Scheduled(initialDelay = 0, fixedDelay = Long.MAX_VALUE)
     fun importProducts() {
-        print("Importing products...k")
+        print("Importing products...")
         try {
             val url = URL(productUrl)
             val wrapper: ProductWrapper = objectMapper.readValue(url, ProductWrapper::class.java)
